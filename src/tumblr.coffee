@@ -26,8 +26,10 @@ Tumblr = exports.Tumblr = (host, key) ->
 
   # Retrieve blog likes.
   # This method returns the publicly exposed likes from a blog.
-  @likes = (fn) ->
-    url = urlFor 'likes', @
+  @likes = (options, fn) ->
+    [fn, options] = [options, null] if typeof options is 'function'
+
+    url = urlFor 'likes', @, options
 
     request url, fn
 
